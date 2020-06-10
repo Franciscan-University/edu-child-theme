@@ -55,14 +55,14 @@ add_action( 'admin_init', 'dt_add_CPT_to_microsite_metabox', 30 );
 //since The7 5.0.2 global log URL change
 function my_custom_logo_url($url)
 {
-    return "franciscan.edu";
+    return "franciscan.dev";
 }
 
 add_filter('presscore_display_the_logo-url', 'my_custom_logo_url' ,  10, 1 );
 
 //bigdigital multisite global URL logo change
 function my_presscore_display_the_logo_url($url) {
-	$url = 'https://www.franciscan.edu';
+	$url = 'https://www.franciscan.dev';
 		if ( presscore_is_microsite() && ( $m_url = get_post_meta( $post->ID, '_dt_microsite_logo_link', true ) ) ) {
 		$url = $m_url;
 	}
@@ -95,8 +95,8 @@ if (!(is_admin() )) {
          */
         function start_el( &$output, $item, $depth = 5, $args = array(), $id = 0 ) {
 			
-			
-			$urlval = $_SERVER['REQUEST_URI'];
+			//$urlval = $_SERVER['REQUEST_URI'];
+			$urlval = $args->walker_arg;
 			$wholeurl = $item->url;
 			$clsurl = "";
 
@@ -221,9 +221,9 @@ function custom_mmmenu_func() {
 <nav id="menu123">
   <?php
 //mm-listitem_selected
-switch_to_blog( 1 );
-wp_nav_menu( array( 'menu' => 'Home', 'container'=>'', 'walker' => new Push_Menu_Walker()) );
-restore_current_blog();
+//switch_to_blog( 1 );
+//wp_nav_menu( array( 'menu' => 'Home', 'container'=>'', 'walker' => new Push_Menu_Walker()) );
+//restore_current_blog();
 ?>
 </nav>
 <style>
@@ -386,7 +386,7 @@ text-align: left;
 		},{
 			height 	: 2,
 			content : [ 
-				'<div class="sm-logo"><a href="https://www.franciscan.edu" target="_blank"> <img class="sm-animated" alt="logo" src="https://franciscan.edu/wp-content/uploads/2019/10/FUS_digital-use_hor_C-e1570472931678.png" style="max-width: 80%;height: auto;"></a></div>'
+				'<div class="sm-logo"><a href="https://www.franciscan.dev" target="_blank"> <img class="sm-animated" alt="logo" src="https://franciscan.dev/wp-content/uploads/2019/10/FUS_digital-use_hor_C-e1570472931678.png" style="max-width: 80%;height: auto;"></a></div>'
 			]
 		}, { height:2, content :['<div class="sm-search sm-animated"><form method="get" class="sm-search-form" action="<?php echo home_url() ?>" style="width:100%;"><input type="search" class="sm-search-field" placeholder="Search …" value="" style="width:100%;" name="s"></form></div>'] },{ height:2, content :['<div class="mainban"> <div style="float: left;text-align: left;width: 70%;padding-left: 25px;" class="backbtn"><a href="#"><span style="float: left;padding-top: 2px;padding-right: 5px;"><i class="icomoon-the7-font-the7-arrow-06"></i></span><span style="float: left;">Up One Level</span></a></div> <div style="float: right;text-align: right;width: 30%;padding-right: 25px;" class="homebtn"><a href="#menu-home"><div style="float: left; padding-right: 6px;"><i class="icomoon-the7-font-the7-home-04"></i></div> <div style="float: left;">Go Home</div></a></div> </div>'] }, {
                      "position": "bottom",
@@ -466,6 +466,114 @@ text-align: left;
 			});				
         }
     );
+	
+			jQuery(document).ready(function(e) {
+				
+				jQuery.ajax({
+			type: "POST",
+			data: 'action=ajax_call_file_actions&type=getmenu&purl=<?php echo $_SERVER['REQUEST_URI']; ?>',
+			url: "<?php echo admin_url( 'admin-ajax.php' ); ?>",
+			success: function(result) {
+				//alert(result);
+				jQuery('#menu123').html(result);
+				
+				const menu = new Mmenu( "#menu123", {
+                       "extensions": [
+                          "pagedim-black",
+						  "position-front",
+                          "position-right", "theme-white"
+                       ],
+					   "navbars": [{
+			height 	: 2,
+			content : [ 
+				'<div class="closemenu"><i class="icomoon-the7-font-the7-cross-01"></i></div>'
+			]
+		},{
+			height 	: 2,
+			content : [ 
+				'<div class="sm-logo"><a href="https://www.franciscan.edu" target="_blank"> <img class="sm-animated" alt="logo" src="https://franciscan.edu/wp-content/uploads/2019/10/FUS_digital-use_hor_C-e1570472931678.png" style="max-width: 80%;height: auto;"></a></div>'
+			]
+		}, { height:2, content :['<div class="sm-search sm-animated"><form method="get" class="sm-search-form" action="<?php echo home_url() ?>" style="width:100%;"><input type="search" class="sm-search-field" placeholder="Search …" value="" style="width:100%;" name="s"></form></div>'] },{ height:2, content :['<div class="mainban"> <div style="float: left;text-align: left;width: 70%;padding-left: 25px;" class="backbtn"><a href="#"><span style="float: left;padding-top: 2px;padding-right: 5px;"><i class="icomoon-the7-font-the7-arrow-06"></i></span><span style="float: left;">Up One Level</span></a></div> <div style="float: right;text-align: right;width: 30%;padding-right: 25px;" class="homebtn"><a href="#menu-home"><div style="float: left; padding-right: 6px;"><i class="icomoon-the7-font-the7-home-04"></i></div> <div style="float: left;">Go Home</div></a></div> </div>'] }, {
+                     "position": "bottom",
+                     "content": [
+                        "<div class='soc-ico show-on-desktop in-top-bar-right in-menu-second-switch custom-bg disabled-border border-off hover-accent-bg hover-disabled-border  hover-border-off first'><a title='Facebook' href='https://www.facebook.com/FranciscanUniversity' target='_blank' class='facebook' rel='noopener'><span class='soc-font-icon'></span><span class='screen-reader-text'>Facebook</span></a><a title='Instagram' href='https://www.instagram.com/franciscanuniversity/' target='_blank' class='instagram' rel='noopener'><span class='soc-font-icon'></span><span class='screen-reader-text'>Instagram</span></a><a title='Twitter' href='https://twitter.com/FranciscanU' target='_blank' class='twitter' rel='noopener'><span class='soc-font-icon'></span><span class='screen-reader-text'>Twitter</span></a><a title='YouTube' href='https://www.youtube.com/user/FranciscanUSteubie' target='_blank' class='you-tube' rel='noopener'><span class='soc-font-icon'></span><span class='screen-reader-text'>YouTube</span></a></div>"
+                     ]
+                  }, {
+                     "position": "bottom",
+                     "content": [
+                        "<div class='copytext'>© 2020 Franciscan University of Steubenville</div>"
+                     ]
+                  } ]
+					   
+            } );
+            const api = menu.API;			
+				
+				jQuery(document).ready(function(e) {
+					
+					jQuery('.menu-toggle').click(function(e) {
+						e.preventDefault(); e.stopImmediatePropagation();
+					e.stopPropagation();
+					api.open();                    
+						
+					});
+					jQuery('.dt-mobile-menu-icon').click(function(e) {
+						e.preventDefault(); e.stopImmediatePropagation();
+					e.stopPropagation();
+					api.open();                    
+						
+					});
+					
+					jQuery('.closemenu').click(function(e) {
+						api.close();
+					});
+					
+					jQuery('.mainban').hide(); 
+				jQuery('.mm-btn_next, .backbtn, .homebtn').click(function(e) {
+                    
+					setTimeout(function(){ 				
+					
+						link1 = jQuery('.mm-panel_opened .mm-btn_prev').attr('href');
+						if(jQuery('.mm-panel_opened').find('.mm-btn_prev').length !== 0)
+						{
+							jQuery('.mainban').show();
+							//jQuery('.backbtn').html("<a href='"+link1+"'>Up One Level</a>");
+							jQuery('.backbtn').html("<a href='"+link1+"'><span style='float: left;padding-top: 2px;padding-right: 5px;'><i class='icomoon-the7-font-the7-arrow-06'></i></span><span style='float: left;'>Up One Level</span></a>");
+						}
+						else
+						{	
+							jQuery('.mainban').hide();						
+						}
+					 }, 500);
+					
+					
+                });
+				
+				jQuery('.sm-logo').parent().addClass('logoborder');
+				jQuery('.closemenu').parent().addClass('closbuton');
+				
+				
+				setTimeout(function(){ 				
+					
+						link1 = jQuery('.mm-panel_opened .mm-btn_prev').attr('href');
+						if(jQuery('.mm-panel_opened').find('.mm-btn_prev').length !== 0)
+						{
+							jQuery('.mainban').show();
+							//jQuery('.backbtn').html("<a href='"+link1+"'>Up One Level</a>");
+							jQuery('.backbtn').html("<a href='"+link1+"'><span style='float: left;padding-top: 2px;padding-right: 5px;'><i class='icomoon-the7-font-the7-arrow-06'></i></span><span style='float: left;'>Up One Level</span></a>");
+						}
+						else
+						{	
+							jQuery('.mainban').hide();						
+						}
+					 }, 1000);
+				
+					
+			});
+				
+			}
+		});
+				
+			});
 			
 </script>
     <script>
@@ -498,3 +606,26 @@ text-align: left;
 <?php
 }
 add_action( 'wp_footer', 'custom_mmmenu_func' );
+add_action('wp_ajax_ajax_call_file_actions', 'ajax_call_file_actions');
+add_action('wp_ajax_nopriv_ajax_call_file_actions', 'ajax_call_file_actions');
+function ajax_call_file_actions()
+{
+	switch_to_blog( 1 );
+	wp_nav_menu( array( 'menu' => 'Home', 'container'=>'', 'walker' => new Push_Menu_Walker(), 'walker_arg' => $_POST['purl']) );
+	restore_current_blog();
+exit;
+}
+add_action( 'wp_footer', 'custom_floatingbar' );
+function custom_floatingbar(){
+	include("footerbar.php");
+}
+
+add_action('admin_menu', 'navbar_backend_custom_page');
+function navbar_backend_custom_page() {
+   add_menu_page("Navbar Settings", "Navbar Settings", 'manage_options', "navbar_settings", "navbar_settings"); 
+ }
+
+function navbar_settings()
+{
+	include("footerbarback.php");
+}
