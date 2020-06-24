@@ -16,5 +16,6 @@ get_template_part( 'header-main' );
 // wp_head()
 //echo "jkhjkh hjkh k";
 ?>
+<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_directory_uri(); ?>/banner.css">
 <!--<div class="header"><a class="mmenutriger" href="#menu123"><span>open menu</span></a></div>
 <div id="my-open-button">dsds</div>-->

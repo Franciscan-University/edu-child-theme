@@ -55,14 +55,14 @@ add_action( 'admin_init', 'dt_add_CPT_to_microsite_metabox', 30 );
 //since The7 5.0.2 global log URL change
 function my_custom_logo_url($url)
 {
-    return "franciscan.dev";
+    return "franciscan.edu";
 }
 
 add_filter('presscore_display_the_logo-url', 'my_custom_logo_url' ,  10, 1 );
 
 //bigdigital multisite global URL logo change
 function my_presscore_display_the_logo_url($url) {
-	$url = 'https://www.franciscan.dev';
+	$url = 'https://www.franciscan.edu';
 		if ( presscore_is_microsite() && ( $m_url = get_post_meta( $post->ID, '_dt_microsite_logo_link', true ) ) ) {
 		$url = $m_url;
 	}
@@ -386,7 +386,7 @@ text-align: left;
 		},{
 			height 	: 2,
 			content : [ 
-				'<div class="sm-logo"><a href="https://www.franciscan.dev" target="_blank"> <img class="sm-animated" alt="logo" src="https://franciscan.dev/wp-content/uploads/2019/10/FUS_digital-use_hor_C-e1570472931678.png" style="max-width: 80%;height: auto;"></a></div>'
+				'<div class="sm-logo"><a href="https://www.franciscan.edu" target="_blank"> <img class="sm-animated" alt="logo" src="https://franciscan.edu/wp-content/uploads/2019/10/FUS_digital-use_hor_C-e1570472931678.png" style="max-width: 80%;height: auto;"></a></div>'
 			]
 		}, { height:2, content :['<div class="sm-search sm-animated"><form method="get" class="sm-search-form" action="<?php echo home_url() ?>" style="width:100%;"><input type="search" class="sm-search-field" placeholder="Search …" value="" style="width:100%;" name="s"></form></div>'] },{ height:2, content :['<div class="mainban"> <div style="float: left;text-align: left;width: 70%;padding-left: 25px;" class="backbtn"><a href="#"><span style="float: left;padding-top: 2px;padding-right: 5px;"><i class="icomoon-the7-font-the7-arrow-06"></i></span><span style="float: left;">Up One Level</span></a></div> <div style="float: right;text-align: right;width: 30%;padding-right: 25px;" class="homebtn"><a href="#menu-home"><div style="float: left; padding-right: 6px;"><i class="icomoon-the7-font-the7-home-04"></i></div> <div style="float: left;">Go Home</div></a></div> </div>'] }, {
                      "position": "bottom",

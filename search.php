@@ -266,7 +266,7 @@ if ( 0 < count( $blogs ) ) :
 			//echo "<pre>";print_r($allpostids);			
 			?>
 		<div class="paginator" id="pagin" role="navigation"></div>
-		<div style="text-align: center; display:none;" class="loaddiv"> <img class=" preload-me" src="https://franciscan.dev/wp-content/themes/dt-the7-child/loading.gif" sizes="" width="50" height="50"> </div>
+		<div style="text-align: center; display:none;" class="loaddiv"> <img class=" preload-me" src="https://franciscan.edu/wp-content/themes/dt-the7-child/loading.gif" sizes="" width="50" height="50"> </div>
 	</div>
 </div>
 <!-- #content -->
