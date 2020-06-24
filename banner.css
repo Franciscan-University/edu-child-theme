@@ -1,5 +1,5 @@
 body, html {
-  padding: 0; margin: 0; 
+  padding: 0; margin: 0;  }
 .parallax {position: absolute;height: 100%;left: 0px;right: 0px;background-attachment: fixed;background-position: top center;background-repeat: no-repeat;background-size: cover;}
 .HeroBanner {position: relative;height: auto;}
 .banner1, .banner2, .banner3{ display: none; }
