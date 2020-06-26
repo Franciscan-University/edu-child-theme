@@ -13,8 +13,12 @@ $navbarsettings = get_option("navbarsettings");
 	#floating-bar .floating-bar-title{ display: block; font-size: 16px;font-weight: 700; }
 	#floating-bar .floating-bar-icon i{ color:#998643;font-weight:bold; font-size:23px; }
 	
+	@media only screen and (min-width:1025px){
+		#floating-bar.hide_on_standard,#floating-bar.hide_on_desktop{display:none}}
+	@media only screen and (min-width:768px) and (max-width:1024px){#floating-bar.hide_on_tablet{display:none}}
 	@media only screen and (max-width:767px){#floating-bar.hide_on_mobile{display:none}
 	#floating-bar .floating-bar-title{ font-size: 14px;font-weight: 700; }
+	#floating-bar .floating-bar-link{ padding:8px !important; }
 	}
 	/*hide_on_footer*/
   </style>
