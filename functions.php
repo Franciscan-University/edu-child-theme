@@ -629,3 +629,8 @@ function navbar_settings()
 {
 	include("footerbarback.php");
 }
+add_filter( 'presscore_post_type_dt_testimonials_args', 'my_testimonials_slug' );
+function my_testimonials_slug( $args ) {
+    $args['rewrite'] = array('slug' => 'voices');
+    return $args;
+}
